@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create, :destroy, :update]
   resources :listings, only: [:show, :index, :update, :destroy, :create]
   resources :characteristics, except: [:edit, :new, :show]
+  resources :seeker_applications, only: [:show, :create, :update, :destroy]
 end

@@ -1,0 +1,2 @@
+class SeekerApplicationsController < ApplicationController
+end
