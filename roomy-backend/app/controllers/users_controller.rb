@@ -10,7 +10,23 @@ class UsersController < ApplicationController
         if user.save
             render json: UserSerializer.serialize_user(user)
         else
-            render json: {message: "Invalid user attributes."}
+            render json: {
+                message: "Invalid user attributes.",
+                errors: user.errors
+            }
+        end
+    end
+
+    def update
+        user = User.find_by(id: params[:id])
+
+        if user.update
+            render json: UserSerializer.serialize_user(user)
+        else
+            render json: {
+                message: "Invalid user attributes.",
+                errors: user.errors
+            }
         end
     end
 
