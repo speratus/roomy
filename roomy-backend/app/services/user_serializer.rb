@@ -8,7 +8,8 @@ class UserSerializer
             username: user.username, 
             name: user.name, 
             type: user.user_type, 
-            avatar: avatar_url
+            avatar: avatar_url,
+            personalCharacteristics: user.characteristics
         }
     end
 

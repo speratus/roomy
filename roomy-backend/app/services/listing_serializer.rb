@@ -28,7 +28,7 @@ class ListingSerializer
             image: image_url,
             user: UserSerializer.serialize_basic_user_info(listing.user, user_avatar_url),
             updatedAt: listing.updated_at,
-            preferredCharacteristics: listing.characteristics.map {|c| c.description }
+            preferredCharacteristics: listing.characteristics
         }
     end
 
