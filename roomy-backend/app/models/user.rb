@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
     accepts_nested_attributes_for :characteristics
 
+    validates :name, :username, :type, presence: true
+    validates :type, inclusion: {in: %w(RoomHost RoomSeeker)}
+    validates :username, uniqueness: true
+
     def is_room_host
         self.type == 'RoomHost'
     end
