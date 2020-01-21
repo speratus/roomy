@@ -7,12 +7,16 @@ class UsersController < ApplicationController
     def create
         user = User.new(user_params)
 
+        user_params(:characteristics => [:description])[:characteristics].each do |c|
+            user.characteristics.build(c)
+        end
+
         if user.save
             render json: UserSerializer.serialize_user(user)
         else
             render json: {
                 message: "Invalid user attributes.",
-                errors: user.errors
+                errors: user.errors.full_messages
             }
         end
     end
@@ -47,7 +51,8 @@ class UsersController < ApplicationController
 
     private
 
-    def user_params
-        params.require(:user).permit(:name, :username, :user_type, :characteristics => [:description])
+    def user_params(*args)
+        params.require(:user).permit(:name, :username, :user_type, *args)
     end
+
 end
