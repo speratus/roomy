@@ -7,7 +7,7 @@ class UserSerializer
             id: user.id, 
             username: user.username, 
             name: user.name, 
-            type: user.type, 
+            type: user.user_type, 
             avatar: avatar_url
         }
     end
