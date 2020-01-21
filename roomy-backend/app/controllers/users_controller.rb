@@ -20,12 +20,27 @@ class UsersController < ApplicationController
     def update
         user = User.find_by(id: params[:id])
 
-        if user.update
-            render json: UserSerializer.serialize_user(user_params)
+        if user.update(user_params)
+            render json: UserSerializer.serialize_user(user)
         else
             render json: {
                 message: "Invalid user attributes.",
                 errors: user.errors
+            }
+        end
+    end
+
+    def destroy
+        user = User.find_by(id: params[:id])
+
+        if user.destroy
+            render json: {
+                message: "Successfully destroyed user",
+                user: user
+            }
+        else
+            render json: {
+                message: "Failed to destroy the user."
             }
         end
     end
