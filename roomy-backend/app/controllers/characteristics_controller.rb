@@ -12,7 +12,7 @@ class CharacteristicsController < ApplicationController
 
     def index
         characteristics = Characteristic.all
-        render characteristics
+        render json: characteristics, only: [:id, :description]
     end
 
     def update

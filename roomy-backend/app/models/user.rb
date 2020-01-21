@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
     has_one_attached :avatar
 
+    accepts_nested_attributes_for :characteristics
+
     def is_room_host
         self.type == 'RoomHost'
     end
