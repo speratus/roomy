@@ -9,9 +9,10 @@
 require 'Faker'
 
 User.delete_all
+Listing.delete_all
 
 5.times do
-    User.create(name: Faker::Name.name, username: Faker::Internet.email, type: 'RoomHost')
+    User.create(name: Faker::Name.name, username: Faker::Internet.email, user_type: 'RoomHost')
 end
 
 rand = Random.new
