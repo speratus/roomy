@@ -10,4 +10,8 @@ class SeekerApplicationSerializer
         }
     end
 
+    def self.serialize_all(applications)
+        applications.map {|a| SeekerApplicationSerializer.serialize_application(a)}
+    end
+
 end

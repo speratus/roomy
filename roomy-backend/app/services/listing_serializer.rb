@@ -39,4 +39,16 @@ class ListingSerializer
             image: ListingSerializer.get_image_url_for(listing)
         }
     end
+
+    def self.serialize_with_applications(listing)
+        output = ListingSerializer.serialize_listing(listing)
+        output[:applications] = SeekerApplicationSerializer.serialize_all(listing.applications)
+        output
+    end
+
+    def self.serialize_with_users_application(listing, application)
+        output = ListingSerializer.serialize_listing(listing)
+        output[:application] = SeekerApplicationSerializer.serialize_application(application)
+        output
+    end
 end
