@@ -11,6 +11,8 @@ class ListingSerializer
             targetNumberOfRoommates: listing.target_roommate_number,
             image: image_url,
             user: UserSerializer.serialize_basic_user_info(listing.user, url_for(listing.user))
+            updatedAt: listing.updated_at,
+            preferredCharacteristics: listing.characteristics.map {|c| c.description }
         }
     end
 end
