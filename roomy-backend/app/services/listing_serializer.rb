@@ -10,6 +10,7 @@ class ListingSerializer
 
     def self.serialize_listing(listing)
         {
+            id: listing.id,
             title: listing.title, 
             description: listing.description,
             address: listing.address,
@@ -26,6 +27,16 @@ class ListingSerializer
     def self.serialize_all(listings)
         listings.map { |listing|
             ListingSerializer.serialize_listing(listing)
+        }
+    end
+
+    def self.serialize_basic_info(listing)
+        {
+            id: listing.id,
+            title: listing.title,
+            description: listing.description,
+            address: listing.address,
+            image: ListingSerializer.get_image_url_for(listing)
         }
     end
 end
