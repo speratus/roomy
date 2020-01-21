@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :listings, only: [:show, :index, :update, :destroy, :create]
   resources :characteristics, except: [:edit, :new, :show]
   resources :seeker_applications, only: [:show, :create, :update, :destroy]
+  post '/login', to: 'logins#login'
 end
