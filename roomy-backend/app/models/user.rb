@@ -19,4 +19,12 @@ class User < ApplicationRecord
     def is_room_seeker
         self.type == 'RoomSeeker'
     end
+
+    def characteristics=(characteristics)
+        self.characteristics.clear
+        characteristics.each do |char|
+            characteristic = Characteristic.find_or_create_by(description: char[:description])
+            self.characteristics << characteristic
+        end
+    end
 end
