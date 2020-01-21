@@ -1,0 +1,14 @@
+{
+  "name": "roomy-frontend",
+  "version": "1.0.0",
+  "description": "The frontend for Roomy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Luchuk",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.8.0"
+  }
+}
