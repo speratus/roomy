@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-    has_one :listing
+    has_one :listing, dependent: :destroy
 
-    has_many :personal_characteristics
+    has_many :personal_characteristics, dependent: :destroy
     has_many :characteristics, through: :personal_characteristics
 
     has_one_attached :avatar
