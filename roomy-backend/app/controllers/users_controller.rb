@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         user = User.find_by(id: params[:id])
 
         if user.update
-            render json: UserSerializer.serialize_user(user)
+            render json: UserSerializer.serialize_user(user_params)
         else
             render json: {
                 message: "Invalid user attributes.",
