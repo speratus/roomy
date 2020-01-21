@@ -3,6 +3,9 @@ class Listing < ApplicationRecord
   has_many :preferred_characteristics, dependent: :destroy
   has_many :characteristics, through: :preferred_characteristics
 
+  has_many :seeker_applications, dependent: :destroy
+  has_many :applicants, through: :seeker_applications, source: :user
+
   has_one_attached :image
 
   validates :title, :description, :address, :monthly_rent, :status, :user_id, presence: true

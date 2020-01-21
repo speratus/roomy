@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
     has_many :personal_characteristics, dependent: :destroy
     has_many :characteristics, through: :personal_characteristics
+    has_many :seeker_applications, through: :listing
+    has_many :applicants, through: :listing
+
+    has_many :applications, class_name: 'SeekerApplication'
 
     has_one_attached :avatar
 
