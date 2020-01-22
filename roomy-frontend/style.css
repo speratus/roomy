@@ -1,0 +1,23 @@
+.box {
+    width: 100%;
+    word-wrap: normal;
+}
+
+.text-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.text-wrap > p {
+    text-overflow: ellipsis;
+}
+
+.wrapped {
+    word-wrap: normal;
+    overflow-wrap: normal;
+}
+
+p {
+    word-wrap: normal;
+}

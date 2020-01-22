@@ -1,4 +1,4 @@
 const navBar = new Navbar()
 
 basePage.navbar = navBar.renderNavbar()
-basePage.showMain()
+basePage.showWelcome().bind(basePage)
