@@ -54,7 +54,7 @@ class Listing {
     }
 
     executeListingClick(e) {
-        const id = e.target.dataset.id
+        const id = this.dataset.id
         fetch(basePage.baseURL+`/listings/${id}`).then(res => {
             return res.json()
         }).then(json => {
