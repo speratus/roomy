@@ -33,10 +33,6 @@ class BasePage {
 
         return span
     }
-
-    
-
-    
 }
 
 const basePage = new BasePage()

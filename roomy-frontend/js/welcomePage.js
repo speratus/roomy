@@ -58,6 +58,98 @@ class WelcomePage {
         return loginForm
     }
 
+    renderSignupForm() {
+        const form = document.createElement('form')
+
+        //Create elements relating to the Name text field
+        const nameField = document.createElement('div')
+        nameField.className = 'field'
+        
+        const nameLabel = document.createElement('label')
+        nameLabel.className = 'label'
+        nameLabel.textContent = 'Name'
+
+        const nameControl = document.createElement('div')
+        nameControl.className = 'control'
+
+        const nameInput = document.createElement('input')
+        nameInput.type = 'text'
+        nameInput.className = 'input is-rounded is-primary'
+
+        nameControl.appendChild(nameInput)
+
+        nameField.appendChild(nameLabel)
+        nameField.appendChild(nameControl)
+
+        //Create elements relating to the username text field
+        const userNameField = document.createElement('div')
+        userNameField.className = 'field'
+
+        const userNameLabel = document.createElement('label')
+        userNameLabel.className = 'label'
+        userNameLabel.textContent = 'Username'
+
+        const userNameControl = document.createElement('div')
+        userNameControl.className = 'control'
+
+        const userNameInput = document.createElement('input')
+        userNameInput.type = 'text'
+        userNameInput.className = 'input is-rounded is-primary'
+
+        userNameControl.appendChild(userNameInput)
+
+        userNameField.appendChild(userNameLabel)
+        userNameField.appendChild(userNameControl)
+
+        //Create elements relating to the type radio buttons
+        const typeField = document.createElement('div')
+        typeField.className = 'field'
+
+        const typeControl = document.createElement('div')
+        typeControl.className = 'control'
+
+        const seekerTypeLabel = document.createElement('label')
+        seekerTypeLabel.className = 'radio'
+
+        const seekerTypeInput = document.createElement('input')
+        seekerTypeInput.type = 'radio'
+        seekerTypeInput.name = 'user-type'
+        seekerTypeInput.value = 'RoomSeeker'
+
+        seekerTypeLabel.appendChild(seekerTypeInput)
+        seekerTypeLabel.append('I am looking for someone to room with')
+
+        const hostTypeLabel = document.createElement('label')
+        hostTypeLabel.className = 'radio'
+
+        const hostTypeInput = document.createElement('input')
+        hostTypeInput.type = 'radio'
+        hostTypeInput.name = 'user-type'
+        hostTypeInput.value = 'RoomHost'
+
+        hostTypeLabel.appendChild(hostTypeInput)
+        hostTypeLabel.append('I have housing and I am looking for roommates')
+
+        typeControl.appendChild(seekerTypeLabel)
+        typeControl.appendChild(hostTypeLabel)
+
+        typeField.appendChild(typeControl)
+
+        //Create submit button
+        const submitButton = document.createElement('input')
+        submitButton.type = 'submit'
+        submitButton.value = 'Submit'
+        submitButton.className = 'button is-link is-medium'
+
+        form.appendChild(nameField)
+        form.appendChild(userNameField)
+        form.appendChild(typeField)
+        form.appendChild(submitButton)
+
+        return form
+
+    }
+
     renderWelcomeView() {
         const buttonLevel = document.createElement('div')
         buttonLevel.className = 'level'
@@ -75,6 +167,9 @@ class WelcomePage {
         const signupButton = document.createElement('button')
         signupButton.className = 'button is-link'
         signupButton.textContent = 'Signup'
+        signupButton.addEventListener('click', e => {
+            this.renderFullPageBanner('Please enter your information below', this.renderSignupForm())
+        })
 
         buttonArea.appendChild(loginButton)
         buttonArea.appendChild(signupButton)
