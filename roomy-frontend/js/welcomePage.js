@@ -32,6 +32,23 @@ class WelcomePage {
         return this.content
     }
 
+    executeLogin(e) {
+        e.preventDefault()
+
+        const username = e.target['username']
+
+        fetch('http://localhost:3000/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username
+            })
+        }).then(res => res.json()).then(console.log)
+    }
+
     renderLoginForm() {
         const loginForm = document.createElement('form')
 
@@ -40,6 +57,7 @@ class WelcomePage {
 
         const input = document.createElement('input')
         input.type = 'text'
+        input.name = 'username'
         input.placeholder = 'Username'
         input.className = 'input is-rounded is-primary'
 
@@ -55,6 +73,8 @@ class WelcomePage {
 
         loginForm.appendChild(inputWrapper)
         loginForm.appendChild(buttonWrapper)
+
+        loginForm.addEventListener('submit', this.executeLogin)
         return loginForm
     }
 
