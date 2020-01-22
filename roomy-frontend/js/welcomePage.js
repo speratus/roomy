@@ -35,7 +35,7 @@ class WelcomePage {
     executeLogin(e) {
         e.preventDefault()
 
-        const username = e.target['username']
+        const username = e.target['username'].value
 
         fetch('http://localhost:3000/login/', {
             method: 'POST',
@@ -45,6 +45,31 @@ class WelcomePage {
             },
             body: JSON.stringify({
                 username: username
+            })
+        }).then(res => res.json()).then(console.log)
+    }
+
+    executeSingup(e) {
+        e.preventDefault()
+        const name = e.target['name'].value
+        const username = e.target['username'].value
+        const userType = e.target['user-type'].value
+
+        const user = {
+            name: name,
+            username: username,
+            "user_type": userType
+        }
+        console.log(user)
+
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                user: user
             })
         }).then(res => res.json()).then(console.log)
     }
@@ -94,6 +119,7 @@ class WelcomePage {
 
         const nameInput = document.createElement('input')
         nameInput.type = 'text'
+        nameInput.name = 'name'
         nameInput.className = 'input is-rounded is-primary'
 
         nameControl.appendChild(nameInput)
@@ -114,6 +140,7 @@ class WelcomePage {
 
         const userNameInput = document.createElement('input')
         userNameInput.type = 'text'
+        userNameInput.name = 'username'
         userNameInput.className = 'input is-rounded is-primary'
 
         userNameControl.appendChild(userNameInput)
@@ -166,8 +193,9 @@ class WelcomePage {
         form.appendChild(typeField)
         form.appendChild(submitButton)
 
-        return form
+        form.addEventListener('submit', this.executeSingup)
 
+        return form
     }
 
     renderWelcomeView() {
