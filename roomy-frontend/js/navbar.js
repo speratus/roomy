@@ -12,7 +12,7 @@ class Navbar {
             brand.id = 'navbar-brand'
 
             const homeLink = document.createElement('a')
-            homeLink.onclick = basePage.showMain
+            homeLink.onclick = basePage.showMain.bind(basePage)
             homeLink.className = 'navbar-item'
             const text = document.createElement('span')
             text.textContent = 'Roomy'

@@ -5,10 +5,18 @@ class BasePage {
     }
 
     static clearElements(node) {
+        console.log('clear elements called from', this)
         if (node !== null & node !== undefined) {
             while (node.firstChild) {
                 node.firstChild.remove()
             }
+        }
+    }
+
+    static clearMainContents() {
+        const content = document.querySelector('#main-content')
+        if (content !== null) {
+            content.remove()
         }
     }
 
@@ -33,7 +41,8 @@ class BasePage {
     }
 
     renderFullPageBanner(mainText, contents) {
-        BasePage.clearElements(this.main.querySelector('#main-content'))
+        console.log('called from ', this)
+        BasePage.clearMainContents()
         const main = document.createElement('main')
         main.id = 'main-content'
 
@@ -60,6 +69,32 @@ class BasePage {
 
     }
 
+    renderLoginForm() {
+        const loginForm = document.createElement('form')
+
+        const inputWrapper = document.createElement('div')
+        inputWrapper.className = 'field'
+
+        const input = document.createElement('input')
+        input.type = 'text'
+        input.placeholder = 'Username'
+        input.className = 'input is-rounded'
+
+        const buttonWrapper = document.createElement('div')
+        buttonWrapper.className = 'field'
+
+        const loginButton = document.createElement('button')
+        loginButton.className = 'button is-link is-medium'
+        loginButton.textContent = 'Login'
+        
+        inputWrapper.appendChild(input)
+        buttonWrapper.appendChild(loginButton)
+
+        loginForm.appendChild(inputWrapper)
+        loginForm.appendChild(buttonWrapper)
+        return loginForm
+    }
+
     renderWelcomeView() {
         const buttonLevel = document.createElement('div')
         buttonLevel.className = 'level'
@@ -70,6 +105,9 @@ class BasePage {
         const loginButton = document.createElement('button')
         loginButton.className = 'button is-link'
         loginButton.textContent = 'Login'
+        loginButton.addEventListener('click', e => {
+            this.renderFullPageBanner('Please Enter your Username to Login', this.renderLoginForm())
+        })
 
         const signupButton = document.createElement('button')
         signupButton.className = 'button is-link'
