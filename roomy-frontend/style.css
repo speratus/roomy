@@ -21,3 +21,7 @@
 p {
     word-wrap: normal;
 }
+
+form {
+    width: 100%;
+}

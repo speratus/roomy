@@ -129,7 +129,7 @@ class Listing {
     }
 
     renderModal(title, contents) {
-        console.log('rendering modal')
+        // console.log('rendering modal')
         const modal = document.createElement('div')
         modal.className = 'modal is-active'
         modal.id = 'listing-details'
@@ -184,5 +184,99 @@ class Listing {
         modal.appendChild(modalCard)
 
         return modal
+    }
+
+    renderControl(type, attribute) {
+        const container = document.createElement('div')
+        container.className = 'control'
+
+        let input
+
+        switch(type) {
+            case 'text':
+                input = document.createElement('input')
+                input.className = 'input is-rounded is-primary'
+                input.name = attribute
+                input.placeholder = attribute
+                input.value = this[attribute]
+                break
+            case 'textarea':
+                input = document.createElement('textarea')
+                input.className = 'textarea has-fixed-size is-primary'
+                input.name = attribute
+                input.placeholder = attribute
+                input.value = this[attribute]
+                break
+            default:
+                return 'Invalid type please enter a valid one'
+        }
+        container.appendChild(input)
+        return container
+    }
+
+    renderSelect(attribute, values) {
+        const container = document.createElement('div')
+        container.className = 'control'
+
+        const selectWrapper = document.createElement('div')
+        selectWrapper.className = 'select is-rounded is-primary'
+
+        const select = document.createElement('select')
+        select.name = attribute
+
+        for (let v of values) {
+            const o = document.createElement('option')
+            o.value = v
+            o.textContent = v
+
+            select.appendChild(o)
+        }
+
+        selectWrapper.appendChild(select)
+        container.appendChild(selectWrapper)
+
+        return container
+    }
+
+    renderField(type, attribute) {
+        const container = document.createElement('div')
+        container.className = 'field'
+
+        const label = document.createElement('label')
+        label.for = attribute
+        label.textContent = attribute
+
+        container.appendChild(label)
+        container.appendChild(this.renderControl(type, attribute))
+
+        return container
+    }
+
+    renderEditForm() {
+        const form = document.createElement('form')
+        form.dataset.id = this.id
+
+        const title = this.renderField('text', 'title')
+
+        const address = this.renderField('text', 'address')
+
+        const status = this.renderSelect('status', ['open', 'partially-filled', 'closed'])
+
+        const targetNumberOfRoommates = this.renderField('text', 'targetNumberOfRoommates')
+
+        const description = this.renderField('textarea', 'description')
+
+        const submit = document.createElement('button')
+        submit.className = 'button is-link'
+        submit.textContent = 'Submit changes'
+
+        form.appendChild(title)
+        form.appendChild(description)
+        form.appendChild(address)
+        form.appendChild(status)
+        form.appendChild(targetNumberOfRoommates)
+        form.appendChild(submit)
+
+        return form
     }
 }

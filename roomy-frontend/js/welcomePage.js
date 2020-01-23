@@ -74,7 +74,10 @@ class WelcomePage {
             body: JSON.stringify({
                 user: user
             })
-        }).then(res => res.json()).then(console.log)
+        }).then(res => res.json()).then(message => {
+            basePage.user = message.user
+            basePage.showMain()
+        })
     }
 
     renderLoginForm() {
