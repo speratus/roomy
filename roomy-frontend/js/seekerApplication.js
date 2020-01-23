@@ -180,14 +180,17 @@ class SeekerApplication {
     }
 
     renderUserImage(url) {
+        console.log('rendering an image')
+        console.log(url)
         const wrapper = document.createElement('figure')
-        wrapper.className = 'image is-256x256'
+        wrapper.className = 'image'
 
-        const img = document.createElement('igm')
-        img.className = 'is-rounded'
+        const img = document.createElement('img')
+        // img.className = 'is-rounded'
         img.src = url
 
         wrapper.appendChild(img)
+        console.log(wrapper)
         return wrapper
     }
 
@@ -199,22 +202,42 @@ class SeekerApplication {
         name.textContent = this.applicant.name
 
         name.addEventListener('click', e => {
+            const container = document.createElement('div')
+            container.className = 'container'
+            
             const imageContainer = document.createElement('div')
             imageContainer.className = 'level'
-            console.log(this)
-            imageContainer.appendChild(this.renderUserImage(this.applicant.avatar))
+            
+            const imgLevelItem = document.createElement('div')
+            imgLevelItem.className = 'level-item'
+            imgLevelItem.appendChild(this.renderUserImage(this.applicant.avatar))
+
+            imageContainer.appendChild(imgLevelItem)
+
+            container.appendChild(imageContainer)
+
+            const messageContainer = document.createElement('div')
+            messageContainer.className = 'level'
+
+            const messageLevelItem = document.createElement('div')
+            messageLevelItem.className = 'level-item'
+
+            const message = document.createElement('p')
+            message.className = 'content'
+            // message.textContent = this.message
+            messageLevelItem.appendChild(message)
 
             const messageLabel = document.createElement('label')
             messageLabel.className = 'label'
             messageLabel.textContent = 'Message:'
-            imageContainer.appendChild(messageLabel)
+            message.appendChild(messageLabel)
+            message.append(this.message)
 
-            const message = document.createElement('p')
-            message.className = 'content'
-            message.textContent = this.message
-            imageContainer.appendChild(message)
+            messageContainer.appendChild(messageLevelItem)
 
-            document.body.appendChild(this.renderModal(this.applicant.name, imageContainer))
+            container.appendChild(messageContainer)
+
+            document.body.appendChild(this.renderModal(this.applicant.name, container))
         })
 
         container.appendChild(name)

@@ -139,7 +139,10 @@ class User {
                     'Accept': 'application/json'
                 },
                 body: formData
-            }).then(res => res.json()).then(console.log)
+            }).then(res => res.json()).then(user => {
+                basePage.user = new User(user)
+                document.querySelector("#edit-user-form").remove()
+            })
         })
 
         return form
