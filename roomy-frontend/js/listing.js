@@ -186,6 +186,16 @@ class Listing {
         return modal
     }
 
+    titleCaseWords(words) {
+        let wordArray = words.split(' ')
+        let newWords = wordArray.map(word => {
+            let capital = word[0].toUpperCase()
+            let rest = word.substring(1)
+            return capital + rest
+        })
+        return newWords
+    }
+
     renderControl(type, attribute) {
         const container = document.createElement('div')
         container.className = 'control'
@@ -197,15 +207,18 @@ class Listing {
                 input = document.createElement('input')
                 input.className = 'input is-rounded is-primary'
                 input.name = attribute
-                input.placeholder = attribute
+                input.placeholder = this.titleCaseWords(attribute)
                 input.value = this[attribute]
                 break
             case 'textarea':
                 input = document.createElement('textarea')
                 input.className = 'textarea has-fixed-size is-primary'
                 input.name = attribute
-                input.placeholder = attribute
+                input.placeholder = this.titleCaseWords(attribute)
                 input.value = this[attribute]
+                break
+            case 'select':
+                input = this.renderSelect(attribute, ['open', 'partially-filled', 'closed'])
                 break
             default:
                 return 'Invalid type please enter a valid one'
@@ -244,7 +257,7 @@ class Listing {
 
         const label = document.createElement('label')
         label.for = attribute
-        label.textContent = attribute
+        label.textContent = this.titleCaseWords(attribute)
 
         container.appendChild(label)
         container.appendChild(this.renderControl(type, attribute))
@@ -260,11 +273,13 @@ class Listing {
 
         const address = this.renderField('text', 'address')
 
-        const status = this.renderSelect('status', ['open', 'partially-filled', 'closed'])
+        const status = this.renderField('select', 'status')
 
         const targetNumberOfRoommates = this.renderField('text', 'targetNumberOfRoommates')
 
         const description = this.renderField('textarea', 'description')
+
+        const rent = this.renderField('text', 'rent')
 
         const submit = document.createElement('button')
         submit.className = 'button is-link'
@@ -273,9 +288,46 @@ class Listing {
         form.appendChild(title)
         form.appendChild(description)
         form.appendChild(address)
+        form.appendChild(rent)
         form.appendChild(status)
         form.appendChild(targetNumberOfRoommates)
         form.appendChild(submit)
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+
+            const title = e.target['title'].value
+            const description = e.target['description'].value
+            const address = e.target['address'].value
+            const status = e.target['status'].value
+            const roommateNumber = parseInt(e.target['targetNumberOfRoommates'].value)
+            const rent = parseInt(e.target['rent'].value)
+
+            const id = e.target.dataset.id
+
+            const data = {
+                title: title,
+                description: description,
+                address: address,
+                'monthly_rent': rent,
+                status: status,
+                'target_roommate_number': roommateNumber
+            }
+
+            fetch(basePage.baseURL+`/listings/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    listing: data
+                })
+            }).then(res => res.json()).then(listingData => {
+                console.log(listingData)
+                basePage.showMain()
+            })
+        })
 
         return form
     }
