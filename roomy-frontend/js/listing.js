@@ -123,7 +123,26 @@ class Listing {
         listArticle.className = 'media'
 
         listArticle.appendChild(this.renderMediaObject())
-        listArticle.appendChild(this.renderDetails())
+        
+        const details = this.renderDetails()
+
+        const application = new SeekerApplication({
+            'user_id': basePage.user.id,
+            'listing_id': this.id
+        })
+        details.appendChild(application.renderInvisibleForm())
+        
+        const applyButton = document.createElement('button')
+        applyButton.className = 'button is-link'
+        applyButton.textContent = 'Apply'
+        applyButton.addEventListener('click', e => {
+            e.target.remove()
+            const form = document.querySelector('#application-form')
+            form.classList.remove('is-hidden')
+        })
+        details.appendChild(applyButton)
+
+        listArticle.appendChild(details)
 
         return this.renderModal(this.title, listArticle)
     }
