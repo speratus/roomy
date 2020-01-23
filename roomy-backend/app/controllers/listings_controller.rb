@@ -7,7 +7,11 @@ class ListingsController < ApplicationController
 
     def show
         listing = Listing.find_by(id: params[:id])
-        render json: ListingSerializer.serialize_listing(listing)
+        if params[:showApplications]
+            render json: ListingSerializer.serialize_with_applications(listing)
+        else
+            render json: ListingSerializer.serialize_listing(listing)
+        end
     end
 
     def create

@@ -82,4 +82,104 @@ class SeekerApplication {
 
         return form
     }
+
+    renderModal(title, contents) {
+        const modal = document.createElement('div')
+        modal.className = 'modal is-active'
+        modal.id = 'application-details'
+
+        const modalBack = document.createElement('div')
+        modalBack.className = 'modal-background'
+
+        modal.appendChild(modalBack)
+
+        const modalCard = document.createElement('div')
+        modalCard.className = 'modal-card'
+
+        const modalHeader = document.createElement('header')
+        modalHeader.className = 'modal-card-head'
+
+        const modalTitle = document.createElement('p')
+        modalTitle.className = 'modal-card-title'
+        modalTitle.textContent = title
+
+        const closeButton = document.createElement('button')
+        closeButton.className = 'delete'
+        closeButton.setAttribute('aria-label', 'close')
+        closeButton.addEventListener('click', e => {
+            document.querySelector('#application-details').remove()
+        })
+
+        modalHeader.appendChild(modalTitle)
+        modalHeader.appendChild(closeButton)
+
+        modalCard.appendChild(modalHeader)
+
+        const modalBody = document.createElement('section')
+        modalBody.className = 'modal-card-body'
+        modalBody.appendChild(contents)
+
+        modalCard.appendChild(modalBody)
+
+        const modalFooter = document.createElement('footer')
+        modalFooter.className = 'modal-card-foot'
+
+        const acceptButton = document.createElement('button')
+        acceptButton.className = 'button is-success'
+        acceptButton.textContent = 'Accept'
+        modalFooter.appendChild(acceptButton)
+
+        const rejectButton = document.createElement('button')
+        rejectButton.className = 'button is-danger'
+        rejectButton.textContent = 'Reject'
+        modalFooter.appendChild(rejectButton)
+
+        modalCard.appendChild(modalFooter)
+
+        modal.appendChild(modalCard)
+
+        return modal
+    }
+
+    renderUserImage(url) {
+        const wrapper = document.createElement('figure')
+        wrapper.className = 'image is-256x256'
+
+        const img = document.createElement('igm')
+        img.className = 'is-rounded'
+        img.src = url
+
+        wrapper.appendChild(img)
+        return wrapper
+    }
+
+    renderForListingDetail() {
+        const container = document.createElement('li')
+
+        const name = document.createElement('a')
+        name.textContent = this.applicant.name
+
+        name.addEventListener('click', e => {
+            const imageContainer = document.createElement('div')
+            imageContainer.className = 'level'
+            console.log(this)
+            imageContainer.appendChild(this.renderUserImage(this.applicant.avatar))
+
+            const messageLabel = document.createElement('label')
+            messageLabel.className = 'label'
+            messageLabel.textContent = 'Message:'
+            imageContainer.appendChild(messageLabel)
+
+            const message = document.createElement('p')
+            message.className = 'content'
+            message.textContent = this.message
+            imageContainer.appendChild(message)
+
+            document.body.appendChild(this.renderModal(this.applicant.name, imageContainer))
+        })
+
+        container.appendChild(name)
+
+        return container
+    }
 }

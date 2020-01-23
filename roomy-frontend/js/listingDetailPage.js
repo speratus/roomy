@@ -37,7 +37,7 @@ class ListingDetailPage {
         })
 
         mediaContainer.appendChild(leftMedia)
-        const details = this.listing.renderDetails()
+        const details = this.listing.renderDetails(true)
         details.appendChild(editButton)
         mediaContainer.appendChild(details)
 

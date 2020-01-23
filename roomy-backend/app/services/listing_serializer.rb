@@ -42,7 +42,7 @@ class ListingSerializer
 
     def self.serialize_with_applications(listing)
         output = ListingSerializer.serialize_listing(listing)
-        output[:applications] = SeekerApplicationSerializer.serialize_all(listing.applications)
+        output[:applications] = SeekerApplicationSerializer.serialize_all(listing.seeker_applications)
         output
     end
 

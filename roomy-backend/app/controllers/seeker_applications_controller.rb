@@ -36,7 +36,7 @@ class SeekerApplicationsController < ApplicationController
 
         if application.destroy
             render json: {
-                message: "Successfully delete application",
+                message: "Successfully deleted application",
                 application: SeekerApplicationSerializer.serialize_application(application)
             }
         else

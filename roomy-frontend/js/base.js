@@ -39,7 +39,7 @@ class BasePage {
 
             if (this.user.type === 'RoomHost') {
                 console.log(`${this.user.username} is a room host`)
-                fetch(this.baseURL+`/listings/${this.user.listingId}`).then(res => res.json()).then(listingData => {
+                fetch(this.baseURL+`/listings/${this.user.listingId}?showApplications=true`).then(res => res.json()).then(listingData => {
                     const listing = new Listing(listingData)
 
                     const listingPage = new ListingDetailPage(listing)

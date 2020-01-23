@@ -1,5 +1,5 @@
 class Listing {
-    constructor({id, title, description, address, rent, status, targetNumberOfRoommates, user, updatedAt, preferredCharacteristics, image}) {
+    constructor({id, title, description, address, rent, status, targetNumberOfRoommates, user, updatedAt, preferredCharacteristics, image, applications}) {
         this.id = id
         this.description = description
         this.address = address
@@ -11,6 +11,7 @@ class Listing {
         this.updatedAt = updatedAt
         this.user = user
         this.preferredCharacteristics = preferredCharacteristics
+        this.applications = applications
     }
 
     renderListingForList() {
@@ -78,7 +79,7 @@ class Listing {
         return imgFigure
     }
 
-    renderDetails() {
+    renderDetails(displayApplications = false) {
         const mediaContentWrapper = document.createElement('div')
         mediaContentWrapper.className = 'media-content'
 
@@ -107,13 +108,35 @@ class Listing {
         const idealCharacteristics = document.createElement('p')
         idealCharacteristics.innerHTML = `<strong>Preferred characteristics:</strong> ${characteristics.join(', ')}`
 
-
+        
+        
         mediaContentWrapper.appendChild(description)
         mediaContentWrapper.appendChild(rentWrapper)
         mediaContentWrapper.appendChild(status)
         mediaContentWrapper.appendChild(roommates)
         mediaContentWrapper.appendChild(updatedTime)
         mediaContentWrapper.appendChild(idealCharacteristics)
+        
+        if (displayApplications) {
+            const applicationContainer = document.createElement('div')
+            applicationContainer.className = 'content'
+
+            const label = document.createElement('label')
+            label.className = 'label'
+            label.textContent = 'Applications:'
+            applicationContainer.appendChild(label)
+
+            const list = document.createElement('ul')
+
+            for (let app of this.applications) {
+                if (app.status !== 'rejected') {
+                    const application = new SeekerApplication(app)
+                    list.appendChild(application.renderForListingDetail())
+                }
+            }
+            applicationContainer.appendChild(list)
+            mediaContentWrapper.appendChild(applicationContainer)
+        }
 
         return mediaContentWrapper
     }
