@@ -59,7 +59,7 @@ class Listing {
             return res.json()
         }).then(json => {
             const l = new Listing(json)
-            document.body.appendChild(l.renderDetails())
+            document.body.appendChild(l.renderDetailsWithModal())
         })
     }
 
@@ -79,9 +79,6 @@ class Listing {
     }
 
     renderDetails() {
-        const listArticle = document.createElement('article')
-        listArticle.className = 'media'
-
         const mediaContentWrapper = document.createElement('div')
         mediaContentWrapper.className = 'media-content'
 
@@ -118,13 +115,21 @@ class Listing {
         mediaContentWrapper.appendChild(updatedTime)
         mediaContentWrapper.appendChild(idealCharacteristics)
 
+        return mediaContentWrapper
+    }
+
+    renderDetailsWithModal() {
+        const listArticle = document.createElement('article')
+        listArticle.className = 'media'
+
         listArticle.appendChild(this.renderMediaObject())
-        listArticle.appendChild(mediaContentWrapper)
+        listArticle.appendChild(this.renderDetails())
 
         return this.renderModal(this.title, listArticle)
     }
 
     renderModal(title, contents) {
+        console.log('rendering modal')
         const modal = document.createElement('div')
         modal.className = 'modal is-active'
         modal.id = 'listing-details'

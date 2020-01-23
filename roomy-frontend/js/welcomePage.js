@@ -46,7 +46,10 @@ class WelcomePage {
             body: JSON.stringify({
                 username: username
             })
-        }).then(res => res.json()).then(basePage.showMain.bind(basePage))
+        }).then(res => res.json()).then(message => {
+            basePage.user = message.user
+            basePage.showMain()
+        })
     }
 
     executeSingup(e) {

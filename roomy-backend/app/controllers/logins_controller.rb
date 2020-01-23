@@ -7,7 +7,7 @@ class LoginsController < ApplicationController
             render json: {
                 success: true,
                 message: "You have been logged in as #{user.username}.",
-                user: user
+                user: UserSerializer.serialize_user(user)
             }
         else
             render json: {

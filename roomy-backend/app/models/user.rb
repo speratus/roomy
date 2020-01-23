@@ -17,11 +17,11 @@ class User < ApplicationRecord
     validates :username, uniqueness: true
 
     def is_room_host
-        self.type == 'RoomHost'
+        self.user_type == 'RoomHost'
     end
 
     def is_room_seeker
-        self.type == 'RoomSeeker'
+        self.user_type == 'RoomSeeker'
     end
 
     def characteristics=(characteristics)

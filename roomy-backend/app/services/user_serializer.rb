@@ -9,7 +9,7 @@ class UserSerializer
     end
 
     def self.serialize_user(user)
-        {
+        user_data = {
             id: user.id, 
             username: user.username, 
             name: user.name, 
@@ -17,6 +17,12 @@ class UserSerializer
             avatar: UserSerializer.get_user_avatar(user),
             personalCharacteristics: user.characteristics
         }
+
+        if user.is_room_host
+            user_data['listingId'] = user.listing.id
+        end
+        
+        user_data
     end
 
     def self.serialize_basic_user_info(user)
