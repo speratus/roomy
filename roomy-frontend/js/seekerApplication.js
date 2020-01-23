@@ -127,11 +127,49 @@ class SeekerApplication {
         const acceptButton = document.createElement('button')
         acceptButton.className = 'button is-success'
         acceptButton.textContent = 'Accept'
+        acceptButton.addEventListener('click', e => {
+            fetch(basePage.baseURL+`/seeker_applications/${this.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    application: {
+                        status: 'accepted'
+                    }
+                })
+            }).then(res => res.json()).then(message => {
+                if (message.id) {
+                    document.querySelector('#application-details').remove()
+                    document.getElementById(`${message.id}`).remove()
+                }
+            })
+        })
         modalFooter.appendChild(acceptButton)
 
         const rejectButton = document.createElement('button')
         rejectButton.className = 'button is-danger'
         rejectButton.textContent = 'Reject'
+        rejectButton.addEventListener('click', e => {
+            fetch(basePage.baseURL+`/seeker_applications/${this.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    application: {
+                        status: 'rejected'
+                    }
+                })
+            }).then(res => res.json()).then(message => {
+                if (message.id) {
+                    document.querySelector('#application-details').remove()
+                    document.getElementById(`${message.id}`).remove()
+                }
+            })
+        })
         modalFooter.appendChild(rejectButton)
 
         modalCard.appendChild(modalFooter)
@@ -155,6 +193,7 @@ class SeekerApplication {
 
     renderForListingDetail() {
         const container = document.createElement('li')
+        container.id = this.id
 
         const name = document.createElement('a')
         name.textContent = this.applicant.name

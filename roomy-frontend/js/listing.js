@@ -129,7 +129,7 @@ class Listing {
             const list = document.createElement('ul')
 
             for (let app of this.applications) {
-                if (app.status !== 'rejected') {
+                if (app.status !== 'rejected' && app.status !== 'accepted') {
                     const application = new SeekerApplication(app)
                     list.appendChild(application.renderForListingDetail())
                 }
