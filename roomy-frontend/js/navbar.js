@@ -66,5 +66,14 @@ class Navbar {
         return link
     }
 
+    appendLeftButton(text, action, icon) {
+        console.log('adding a button')
+
+        const button = this.renderButton({text, icon, action})
+        button.className = 'navbar-item'
+        const area = document.querySelector('#left')
+        area.appendChild(button)
+    }
+
 
 }

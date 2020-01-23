@@ -49,6 +49,10 @@ class WelcomePage {
         }).then(res => res.json()).then(message => {
             basePage.user = message.user
             basePage.showMain()
+            const user = new User(message.user)
+            navBar.appendLeftButton('Edit my Info', () => {
+                document.body.appendChild(user.renderEditModal())
+            })
         })
     }
 
