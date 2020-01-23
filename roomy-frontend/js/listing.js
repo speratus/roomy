@@ -317,7 +317,7 @@ class Listing {
 
         const image = document.createElement('input')
         image.type = 'file'
-        // image.className = 'button'
+        image.className = 'button'
         image.name = 'image'
 
         const status = this.renderField('select', 'status')
