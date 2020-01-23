@@ -2,7 +2,7 @@ class ListingSerializer
 
     def self.get_image_url_for(listing)
         if listing.image.attached?
-            Rails.application.routes.url_helpers.rails_blob_path(listing.image, disposition: 'attachment')
+            'http://localhost:3000' + Rails.application.routes.url_helpers.rails_blob_path(listing.image, disposition: 'attachment', host: 'http://localhost:3000/')
         else
             ''
         end

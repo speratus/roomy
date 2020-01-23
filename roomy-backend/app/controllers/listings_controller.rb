@@ -28,7 +28,11 @@ class ListingsController < ApplicationController
     end
 
     def update
+        # puts "++++++++++++++++++++++++++++++++"
+        # puts "Entering the update action"
         listing = Listing.find_by(id: params[:id])
+        # puts "++++++++++++++++++++++++++++++"
+        # puts listing_params
 
         if listing.update(listing_params)
             render json: ListingSerializer.serialize_listing(listing)
@@ -65,7 +69,8 @@ class ListingsController < ApplicationController
             :monthly_rent, 
             :status, 
             :target_roommate_number, 
-            :user_id, 
+            :user_id,
+            :image,
             characteristics: [:description]
         )
     end

@@ -315,6 +315,11 @@ class Listing {
 
         const address = this.renderField('text', 'address')
 
+        const image = document.createElement('input')
+        image.type = 'file'
+        // image.className = 'button'
+        image.name = 'image'
+
         const status = this.renderField('select', 'status')
 
         const targetNumberOfRoommates = this.renderField('text', 'targetNumberOfRoommates')
@@ -330,6 +335,7 @@ class Listing {
         form.appendChild(title)
         form.appendChild(description)
         form.appendChild(address)
+        form.appendChild(image)
         form.appendChild(rent)
         form.appendChild(status)
         form.appendChild(targetNumberOfRoommates)
@@ -344,27 +350,39 @@ class Listing {
             const status = e.target['status'].value
             const roommateNumber = parseInt(e.target['targetNumberOfRoommates'].value)
             const rent = parseInt(e.target['rent'].value)
+            const image = e.target['image'].files[0]
+
+            const formData = new FormData()
+            
+            formData.append('listing[title]', title)
+            formData.append('listing[description]', description)
+            formData.append('listing[address]', address)
+            formData.append('listing[status]', status)
+            formData.append('listing[target_roommate_number]', roommateNumber)
+            formData.append('listing[monthly_rent]', rent)
+            formData.append('listing[image]', image)
 
             const id = e.target.dataset.id
 
-            const data = {
-                title: title,
-                description: description,
-                address: address,
-                'monthly_rent': rent,
-                status: status,
-                'target_roommate_number': roommateNumber
-            }
+            // const data = {
+            //     title: title,
+            //     description: description,
+            //     address: address,
+            //     'monthly_rent': rent,
+            //     status: status,
+            //     'target_roommate_number': roommateNumber
+            // }
 
             fetch(basePage.baseURL+`/listings/${id}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify({
-                    listing: data
-                })
+                // body: JSON.stringify({
+                //     listing: data
+                // })
+                body: formData
             }).then(res => res.json()).then(listingData => {
                 console.log(listingData)
                 basePage.showMain()
