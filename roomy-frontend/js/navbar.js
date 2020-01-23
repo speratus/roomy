@@ -66,14 +66,29 @@ class Navbar {
         return link
     }
 
-    appendLeftButton(text, action, icon) {
+    appendLeftButton(text, action, id, icon) {
         console.log('adding a button')
+        console.log('id', id)
+        console.log('icon', icon)
 
         const button = this.renderButton({text, icon, action})
         button.className = 'navbar-item'
+        button.id = id
         const area = document.querySelector('#left')
         area.appendChild(button)
     }
 
+    setEditInfoButton(text, action, id, icon) {
+        console.log('id', id)
+        console.log('icon', icon)
+        let editButton = document.getElementById(id)
+
+        if (editButton) {
+            editButton.remove()
+            this.appendLeftButton(text, action, id, icon)
+        } else {
+            this.appendLeftButton(text, action, id, icon)
+        }
+    }
 
 }

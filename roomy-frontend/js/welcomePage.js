@@ -50,9 +50,9 @@ class WelcomePage {
             basePage.user = message.user
             basePage.showMain()
             const user = new User(message.user)
-            navBar.appendLeftButton('Edit my Info', () => {
+            navBar.setEditInfoButton('Edit my Info', () => {
                 document.body.appendChild(user.renderEditModal())
-            })
+            }, 'nav-edit-button')
         })
     }
 
