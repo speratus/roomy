@@ -73,6 +73,10 @@ class User {
             input.name = attribute,
             input.value = o.value
 
+            if (this[attribute] === o.value) {
+                input.setAttribute('checked', '')
+            }
+
             wrapper.appendChild(input)
             wrapper.append(' ' + o.text)
 
@@ -111,6 +115,32 @@ class User {
         form.appendChild(type)
         form.appendChild(avatar)
         form.appendChild(submit)
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+
+            const name = e.target['name'].value
+            const username = e.target['username'].value
+            const type = e.target['type'].value
+            const avatar = e.target['avatar'].files[0]
+
+            const formData = new FormData()
+
+            formData.append('user[name]', name)
+            formData.append('user[username]', username)
+            formData.append('user[user_type]', type)
+            if (avatar) {
+                formData.append('user[avatar]', avatar)
+            }
+
+            fetch(basePage.baseURL+`/users/${this.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            }).then(res => res.json()).then(console.log)
+        })
 
         return form
     }

@@ -2,7 +2,7 @@ class UserSerializer
 
     def self.get_user_avatar(user)
         if user.avatar.attached?
-            Rails.application.routes.url_helpers.rails_blob_path(user.avatar, disposition: 'attachment')
+            'http://localhost:3000' + Rails.application.routes.url_helpers.rails_blob_path(user.avatar, disposition: 'attachment', host: 'http://localhost:3000/')
         else
             ''
         end

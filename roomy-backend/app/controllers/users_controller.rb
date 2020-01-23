@@ -25,7 +25,7 @@ class UsersController < ApplicationController
         else
             render json: {
                 message: "Invalid user attributes.",
-                errors: user.errors
+                errors: user.errors.full_messages
             }
         end
     end
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     private
 
     def user_params()
-        params.require(:user).permit(:name, :username, :user_type, characteristics: [:description])
+        params.require(:user).permit(:name, :username, :user_type, :avatar, characteristics: [:description])
     end
 
 end
