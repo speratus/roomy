@@ -360,7 +360,9 @@ class Listing {
             formData.append('listing[status]', status)
             formData.append('listing[target_roommate_number]', roommateNumber)
             formData.append('listing[monthly_rent]', rent)
-            formData.append('listing[image]', image)
+            if (image) {
+                formData.append('listing[image]', image)
+            }
 
             const id = e.target.dataset.id
 
