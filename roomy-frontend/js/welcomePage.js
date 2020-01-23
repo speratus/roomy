@@ -174,7 +174,7 @@ class WelcomePage {
         seekerTypeInput.value = 'RoomSeeker'
 
         seekerTypeLabel.appendChild(seekerTypeInput)
-        seekerTypeLabel.append('I am looking for someone to room with')
+        seekerTypeLabel.append(' I am looking for someone to room with')
 
         const hostTypeLabel = document.createElement('label')
         hostTypeLabel.className = 'radio'
@@ -185,7 +185,7 @@ class WelcomePage {
         hostTypeInput.value = 'RoomHost'
 
         hostTypeLabel.appendChild(hostTypeInput)
-        hostTypeLabel.append('I have housing and I am looking for roommates')
+        hostTypeLabel.append(' I have housing and I am looking for roommates')
 
         typeControl.appendChild(seekerTypeLabel)
         typeControl.appendChild(hostTypeLabel)

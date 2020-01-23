@@ -79,9 +79,16 @@ class Listing {
         return imgFigure
     }
 
-    renderDetails(displayApplications = false) {
+    renderDetails(displayApplications = false, showTitle = false) {
         const mediaContentWrapper = document.createElement('div')
         mediaContentWrapper.className = 'media-content'
+
+        if (showTitle) {
+            const title = document.createElement('h1')
+            title.textContent = this.title
+            title.className = 'title'
+            mediaContentWrapper.appendChild(title)
+        }
 
         const description = document.createElement('p')
         description.className = 'content'
@@ -120,6 +127,22 @@ class Listing {
         if (displayApplications) {
             const applicationContainer = document.createElement('div')
             applicationContainer.className = 'content'
+
+            const roommates = this.applications.filter(app => app.status === 'accepted')
+            console.log(roommates)
+
+            const roommateLabel = document.createElement('label')
+            roommateLabel.textContent = 'Roommates:'
+            roommateLabel.className = 'label'
+            applicationContainer.appendChild(roommateLabel)
+
+            const roommateList = document.createElement('ul')
+
+            for (let r of roommates) {
+                const roomy = new SeekerApplication(r)
+                roommateList.appendChild(roomy.renderForListingDetail())
+            }
+            applicationContainer.appendChild(roommateList)
 
             const label = document.createElement('label')
             label.className = 'label'

@@ -195,6 +195,7 @@ class SeekerApplication {
     }
 
     renderForListingDetail() {
+        console.log(this)
         const container = document.createElement('li')
         container.id = this.id
 
