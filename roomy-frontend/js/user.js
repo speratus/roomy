@@ -245,4 +245,8 @@ class User {
 
         return modal
     }
+
+    renderApplications() {
+        
+    }
 }
