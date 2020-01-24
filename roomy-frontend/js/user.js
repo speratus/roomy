@@ -219,6 +219,25 @@ class User {
         const modalFooter = document.createElement('footer')
         modalFooter.className = 'modal-card-foot'
 
+        const deleteButton = document.createElement('button')
+        deleteButton.className = 'button is-danger'
+        deleteButton.textContent = 'Delete my Profile'
+        deleteButton.addEventListener('click', e => {
+            fetch(basePage.baseURL+`/users/${this.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(res => res.json()).then(message => {
+                if (message.user) {
+                    document.querySelector('#edit-user-form').remove()
+                    basePage.user = null
+                    basePage.showWelcome()
+                }
+            })
+        })
+        modalFooter.appendChild(deleteButton)
+
         modalCard.appendChild(modalFooter)
 
         modal.appendChild(modalCard)
