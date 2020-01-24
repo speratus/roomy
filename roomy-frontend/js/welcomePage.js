@@ -125,6 +125,7 @@ class WelcomePage {
                         const newUser = new User(message)
                         document.body.appendChild(newUser.renderEditModal('Edit my info', newUser.renderEditForm()))
                     }, 'nav-edit-button')
+                    navBar.setApplicationsButton(message)
                     basePage.showMain()
                 } else {
                     navBar.setEditInfoButton('Edit my Info', () => {

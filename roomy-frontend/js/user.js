@@ -255,9 +255,17 @@ class User {
         // container.className = 'content'
         console.log(this.applications)
 
-        for (let a of this.applications) {
-            console.log('creating application')
-            container.appendChild(new SeekerApplication(a).renderApplicationForUser())
+        if (this.applications.length === 0) {
+            const message = document.createElement("p")
+            message.className = 'title'
+            message.textContent = 'You have no applications'
+            document.body.appendChild(this.renderEditModal('My Applications', message))
+            return
+        } else {
+            for (let a of this.applications) {
+                console.log('creating application')
+                container.appendChild(new SeekerApplication(a).renderApplicationForUser())
+            }
         }
 
         document.body.appendChild(this.renderEditModal('My Applications', container))
