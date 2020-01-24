@@ -85,7 +85,7 @@ class WelcomePage {
                 basePage.showMain()
                 const user = new User(message.user)
                 navBar.setEditInfoButton('Edit my Info', () => {
-                    document.body.appendChild(user.renderEditModal())
+                    document.body.appendChild(user.renderEditModal('Edit my info', user.renderEditForm()))
                 }, 'nav-edit-button')
             } else {
                 this.renderModalNotification(message.message, 'is-danger')
@@ -120,12 +120,14 @@ class WelcomePage {
                 basePage.user = message
                 if (message.type === 'RoomSeeker') {
                     navBar.setEditInfoButton('Edit my Info', () => {
-                        document.body.appendChild(new User(message).renderEditModal())
+                        const newUser = new User(message)
+                        document.body.appendChild(newUser.renderEditModal('Edit my info', newUser.renderEditForm()))
                     }, 'nav-edit-button')
                     basePage.showMain()
                 } else {
                     navBar.setEditInfoButton('Edit my Info', () => {
-                        document.body.appendChild(new User(message).renderEditModal())
+                        const newUser = new User(message)
+                        document.body.appendChild(newUser.renderEditModal('Edit my Info', newUser.renderEditForm()))
                     }, 'nav-edit-button')
                     basePage.showMain()
                     this.renderListingFormModal(message.id)

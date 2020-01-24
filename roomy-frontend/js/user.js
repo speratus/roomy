@@ -178,7 +178,7 @@ class User {
         return form
     }
 
-    renderEditModal() {
+    renderEditModal(title, contents) {
         const modal = document.createElement('div')
         modal.className = 'modal is-active'
         modal.id = 'edit-user-form'
@@ -196,7 +196,7 @@ class User {
 
         const modalTitle = document.createElement('p')
         modalTitle.className = 'modal-card-title'
-        modalTitle.textContent = "Edit my info"
+        modalTitle.textContent = title
 
         const closeButton = document.createElement('button')
         closeButton.className = 'delete'
@@ -212,7 +212,7 @@ class User {
 
         const modalBody = document.createElement('section')
         modalBody.className = 'modal-card-body'
-        modalBody.appendChild(this.renderEditForm())
+        modalBody.appendChild(contents)
 
         modalCard.appendChild(modalBody)
 
