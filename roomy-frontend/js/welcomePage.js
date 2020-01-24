@@ -87,7 +87,7 @@ class WelcomePage {
                 // console.log(user)
                 navBar.setEditInfoButton('Edit my Info', () => {
                     document.body.appendChild(user.renderEditModal('Edit my info', user.renderEditForm()))
-                }, 'nav-edit-button')
+                }, 'nav-edit-button', 'mdi-account-circle')
                 navBar.setApplicationsButton(user)
             } else {
                 this.renderModalNotification(message.message, 'is-danger')
@@ -124,14 +124,14 @@ class WelcomePage {
                     navBar.setEditInfoButton('Edit my Info', () => {
                         const newUser = new User(message)
                         document.body.appendChild(newUser.renderEditModal('Edit my info', newUser.renderEditForm()))
-                    }, 'nav-edit-button')
+                    }, 'nav-edit-button', 'mdi-account-circle')
                     navBar.setApplicationsButton(message)
                     basePage.showMain()
                 } else {
                     navBar.setEditInfoButton('Edit my Info', () => {
                         const newUser = new User(message)
                         document.body.appendChild(newUser.renderEditModal('Edit my Info', newUser.renderEditForm()))
-                    }, 'nav-edit-button')
+                    }, 'nav-edit-button', 'mdi-account-circle')
                     basePage.showMain()
                     this.renderListingFormModal(message.id)
                 }
