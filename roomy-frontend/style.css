@@ -30,3 +30,8 @@ form {
     width: 256px;
     height: 256px;
 }
+
+.modal-card p {
+    max-width: 95%;
+    overflow-wrap: break-word;
+}
