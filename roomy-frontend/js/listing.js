@@ -137,6 +137,7 @@ class Listing {
             applicationContainer.appendChild(roommateLabel)
 
             const roommateList = document.createElement('ul')
+            roommateList.id = 'accepted-roommates'
 
             for (let r of roommates) {
                 const roomy = new SeekerApplication(r)

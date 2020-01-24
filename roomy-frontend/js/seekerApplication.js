@@ -143,6 +143,10 @@ class SeekerApplication {
                 if (message.id) {
                     document.querySelector('#application-details').remove()
                     document.getElementById(`${message.id}`).remove()
+
+                    const list = document.querySelector('#accepted-roommates')
+                    console.log('appending new item to', list)
+                    list.appendChild(this.renderForListingDetail())
                 }
             })
         })
