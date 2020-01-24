@@ -1,17 +1,8 @@
 class Listing {
-    constructor({id, title, description, address, rent, status, targetNumberOfRoommates, user, updatedAt, preferredCharacteristics, image, applications}) {
-        this.id = id
-        this.description = description
-        this.address = address
-        this.rent = rent
-        this.status = status
-        this.title = title
-        this.targetNumberOfRoommates = targetNumberOfRoommates
-        this.image = image
-        this.updatedAt = updatedAt
-        this.user = user
-        this.preferredCharacteristics = preferredCharacteristics
-        this.applications = applications
+    constructor(listing) {
+        for (let key in listing) {
+            this[key] = listing[key]
+        }
     }
 
     renderListingForList() {
@@ -390,6 +381,10 @@ class Listing {
 
             const id = e.target.dataset.id
 
+            if (method === 'POST') {
+                formData.append('listing[user_id]', this.userId)
+            }
+
             // const data = {
             //     title: title,
             //     description: description,
@@ -398,6 +393,8 @@ class Listing {
             //     status: status,
             //     'target_roommate_number': roommateNumber
             // }
+            console.log(basePage.baseURL+target)
+            console.log(method)
 
             fetch(basePage.baseURL+target, {
                 method: method,
@@ -411,6 +408,7 @@ class Listing {
                 body: formData
             }).then(res => res.json()).then(listingData => {
                 console.log(listingData)
+                basePage.user.listingId = listingData.id
                 basePage.showMain()
             })
         })

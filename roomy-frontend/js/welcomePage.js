@@ -124,12 +124,45 @@ class WelcomePage {
                     }, 'nav-edit-button')
                     basePage.showMain()
                 } else {
-                    
+                    console.log(message.type)
+                    this.renderListingFormModal(message.id)
                 }
             } else {
                 this.renderModalNotification(message.message + ` ${message.errors.join(', ')}`, 'is-danger')
             }
         })
+    }
+
+    renderListingFormModal(userId) {
+        const modal = document.createElement('div')
+        modal.className = 'modal is-active'
+        modal.id = 'new-listing-modal'
+
+        const modalBack = document.createElement('div')
+        modalBack.className = 'modal-background'
+        modal.appendChild(modalBack)
+
+        const modalCard = document.createElement('div')
+        modalCard.className = 'modal-card'
+
+        const modalHeader = document.createElement('div')
+        modalHeader.className = 'modal-card-header'
+
+        const modalBody = document.createElement('div')
+        modalBody.className = 'modal-card-body'
+
+        modalBody.appendChild(new Listing({userId: userId}).renderEditForm())
+
+        const modalFooter = document.createElement('div')
+        modalFooter.className = 'modal-card-foot'
+
+        modalCard.appendChild(modalHeader)
+        modalCard.appendChild(modalBody)
+        modalCard.appendChild(modalFooter)
+        
+        modal.appendChild(modalCard)
+
+        document.body.appendChild(modal)
     }
 
     renderLoginForm() {

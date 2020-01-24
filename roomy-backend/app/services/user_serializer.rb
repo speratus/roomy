@@ -18,7 +18,7 @@ class UserSerializer
             personalCharacteristics: user.characteristics
         }
 
-        if user.is_room_host
+        if user.is_room_host && user.listing
             user_data['listingId'] = user.listing.id
         end
         
