@@ -36,7 +36,7 @@ form {
     height: 256px;
 }
 
-.modal-card p {
-    max-width: 95%;
+.modal-card .modal-card-title {
+    max-width: 97%;
     overflow-wrap: break-word;
 }

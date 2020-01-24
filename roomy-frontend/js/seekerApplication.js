@@ -249,4 +249,34 @@ class SeekerApplication {
 
         return container
     }
+
+    renderApplicationForUser() {
+        // console.log('rendering application')
+        const container = document.createElement('div')
+        container.className = 'level'
+
+        const contentWrapper = document.createElement('div')
+        contentWrapper.className = 'level-item has-text-centered'
+
+        const innerWrapper = document.createElement('div')
+
+
+        const listingTitle = document.createElement('p')
+        listingTitle.className = 'content'
+        listingTitle.innerHTML = `<strong>${this.listing.title}</strong>`
+        innerWrapper.appendChild(listingTitle)
+
+        const message = document.createElement('p')
+        message.className = 'subtitle'
+        message.textContent = this.message
+        innerWrapper.appendChild(message)
+
+        // contentWrapper.appendChild(listingTitle)
+        // contentWrapper.appendChild(message)
+        contentWrapper.appendChild(innerWrapper)
+
+        container.appendChild(contentWrapper)
+
+        return container
+    }
 }

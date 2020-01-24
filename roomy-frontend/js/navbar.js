@@ -67,9 +67,9 @@ class Navbar {
     }
 
     appendLeftButton(text, action, id, icon) {
-        console.log('adding a button')
-        console.log('id', id)
-        console.log('icon', icon)
+        // console.log('adding a button')
+        // console.log('id', id)
+        // console.log('icon', icon)
 
         const button = this.renderButton({text, icon, action})
         button.className = 'navbar-item'
@@ -79,8 +79,8 @@ class Navbar {
     }
 
     setEditInfoButton(text, action, id, icon) {
-        console.log('id', id)
-        console.log('icon', icon)
+        // console.log('id', id)
+        // console.log('icon', icon)
         let editButton = document.getElementById(id)
 
         if (editButton) {
@@ -88,6 +88,26 @@ class Navbar {
             this.appendLeftButton(text, action, id, icon)
         } else {
             this.appendLeftButton(text, action, id, icon)
+        }
+    }
+
+    appendRightButton(text, action, id, icon) {
+        const button = this.renderButton({text, icon, action})
+        button.className = 'navbar-item'
+        button.id = id ? id :''
+        const area = document.querySelector('#right')
+        area.appendChild(button)
+    }
+
+    setApplicationsButton(user) {
+        let appButton = document.getElementById('show-my-applications')
+
+        if (appButton) {
+            appButton.remove()
+        } else {
+            this.appendRightButton('View My applications', () => {
+                user.renderApplications()
+            }, 'show-my-applications')
         }
     }
 

@@ -179,6 +179,7 @@ class User {
     }
 
     renderEditModal(title, contents) {
+        // console.log('rendering edit modal')
         const modal = document.createElement('div')
         modal.className = 'modal is-active'
         modal.id = 'edit-user-form'
@@ -246,7 +247,19 @@ class User {
         return modal
     }
 
+    
+
     renderApplications() {
-        
+        // console.log('rendering applications')
+        const container = document.createElement('div')
+        // container.className = 'content'
+        console.log(this.applications)
+
+        for (let a of this.applications) {
+            console.log('creating application')
+            container.appendChild(new SeekerApplication(a).renderApplicationForUser())
+        }
+
+        document.body.appendChild(this.renderEditModal('My Applications', container))
     }
 }

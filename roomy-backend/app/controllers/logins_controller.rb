@@ -7,7 +7,7 @@ class LoginsController < ApplicationController
             render json: {
                 success: true,
                 message: "You have been logged in as #{user.username}.",
-                user: UserSerializer.serialize_user(user)
+                user: params[:showApplications] ? UserSerializer.serialize_with_applications(user) : UserSerializer.serialize_user(user)
             }
         else
             render json: {

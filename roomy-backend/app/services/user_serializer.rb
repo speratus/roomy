@@ -35,7 +35,7 @@ class UserSerializer
 
     def self.serialize_with_applications(user)
         data = self.serialize_user(user)
-        data[:applications] = SeekerApplicationSerializer.serialize_all(user.seeker_applications)
+        data[:applications] = SeekerApplicationSerializer.serialize_all(user.applications)
         data
     end
 end

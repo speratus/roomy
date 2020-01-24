@@ -70,7 +70,7 @@ class WelcomePage {
 
         const username = e.target['username'].value
 
-        fetch('http://localhost:3000/login/', {
+        fetch('http://localhost:3000/login?showApplications=true', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,9 +84,11 @@ class WelcomePage {
                 basePage.user = message.user
                 basePage.showMain()
                 const user = new User(message.user)
+                console.log(user)
                 navBar.setEditInfoButton('Edit my Info', () => {
                     document.body.appendChild(user.renderEditModal('Edit my info', user.renderEditForm()))
                 }, 'nav-edit-button')
+                navBar.setApplicationsButton(user)
             } else {
                 this.renderModalNotification(message.message, 'is-danger')
             }
