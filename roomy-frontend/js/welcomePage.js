@@ -136,6 +136,7 @@ class WelcomePage {
                     this.renderListingFormModal(message.id)
                 }
             } else {
+                console.log(message)
                 this.renderModalNotification(message.message + ` ${message.errors.join(', ')}`, 'is-danger')
             }
         })

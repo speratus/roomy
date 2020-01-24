@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         user = User.new(user_params)
 
         if user.save
-            render json: params[:showApplications] ? UserSerializer.serialize_with_applications(user) UserSerializer.serialize_user(user)
+            render json: params[:showApplications] ? UserSerializer.serialize_with_applications(user) : UserSerializer.serialize_user(user)
         else
             render json: {
                 message: "Invalid user attributes.",

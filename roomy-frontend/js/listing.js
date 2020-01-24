@@ -85,6 +85,10 @@ class Listing {
         description.className = 'content'
         description.textContent = this.description
 
+        const address = document.createElement('p')
+        address.className = 'content'
+        address.innerHTML = `<strong>Address:</strong> ${this.address}`
+
         const rentWrapper = document.createElement('p')
         rentWrapper.className = 'content'
         rentWrapper.innerHTML = `<strong>Rent:</strong> ${this.rent}`
@@ -109,6 +113,7 @@ class Listing {
         
         
         mediaContentWrapper.appendChild(description)
+        mediaContentWrapper.appendChild(address)
         mediaContentWrapper.appendChild(rentWrapper)
         mediaContentWrapper.appendChild(status)
         mediaContentWrapper.appendChild(roommates)
