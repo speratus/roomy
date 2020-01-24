@@ -254,28 +254,53 @@ class SeekerApplication {
         // console.log('rendering application')
         const container = document.createElement('div')
         container.className = 'level'
+        container.id = `application-level-${this.id}`
 
-        const contentWrapper = document.createElement('div')
-        contentWrapper.className = 'level-item has-text-centered'
+        // const contentWrapper = document.createElement('div')
+        // contentWrapper.className = 'level-item'
 
-        const innerWrapper = document.createElement('div')
+        // const innerWrapper = document.createElement('div')
 
 
         const listingTitle = document.createElement('p')
-        listingTitle.className = 'content'
+        listingTitle.className = 'level-item'
         listingTitle.innerHTML = `<strong>${this.listing.title}</strong>`
-        innerWrapper.appendChild(listingTitle)
+        // innerWrapper.appendChild(listingTitle)
 
         const message = document.createElement('p')
-        message.className = 'subtitle'
+        message.className = 'level-item'
         message.textContent = this.message
-        innerWrapper.appendChild(message)
+        // innerWrapper.appendChild(message)
 
         // contentWrapper.appendChild(listingTitle)
         // contentWrapper.appendChild(message)
-        contentWrapper.appendChild(innerWrapper)
+        // contentWrapper.appendChild(innerWrapper)
 
-        container.appendChild(contentWrapper)
+        // container.appendChild(contentWrapper)
+
+        const buttonWrapper = document.createElement('div')
+        buttonWrapper.className = 'level-item buttons'
+
+        const deleteButton = document.createElement('button')
+        deleteButton.className = 'button is-danger'
+        deleteButton.textContent = 'Delete Application'
+        deleteButton.addEventListener('click', e => {
+            fetch(basePage.baseURL+`/seeker_applications/${this.id}`, {
+                method: 'DELETE'
+            }).then(res => res.json()).then(message => {
+                console.log(message)
+                if (message.application) {
+                    console.log(`deleting level application-level-${this.id}`)
+                    document.getElementById(`application-level-${this.id}`).remove()
+                }
+            })
+        })
+
+        buttonWrapper.appendChild(deleteButton)
+
+        container.appendChild(listingTitle)
+        container.appendChild(message)
+        container.appendChild(buttonWrapper)
 
         return container
     }

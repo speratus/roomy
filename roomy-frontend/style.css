@@ -40,3 +40,17 @@ form {
     max-width: 97%;
     overflow-wrap: break-word;
 }
+
+.modal-card-body .level {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+.modal-card-body .level p {
+    max-width: 100%;
+}
+
+p .level-item {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
