@@ -3,6 +3,10 @@
     word-wrap: normal;
 }
 
+.level-item {
+    max-width: 100%;
+}
+
 .text-wrap {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -14,6 +18,7 @@
 }
 
 .wrapped {
+    max-width: 100%;
     word-wrap: normal;
     overflow-wrap: normal;
 }
