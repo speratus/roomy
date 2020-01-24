@@ -124,7 +124,7 @@ class WelcomePage {
                     }, 'nav-edit-button')
                     basePage.showMain()
                 } else {
-    
+                    
                 }
             } else {
                 this.renderModalNotification(message.message + ` ${message.errors.join(', ')}`, 'is-danger')

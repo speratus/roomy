@@ -331,7 +331,7 @@ class Listing {
         return container
     }
 
-    renderEditForm() {
+    renderEditForm(target = `/listings`, method = 'POST') {
         const form = document.createElement('form')
         form.dataset.id = this.id
 
@@ -399,8 +399,8 @@ class Listing {
             //     'target_roommate_number': roommateNumber
             // }
 
-            fetch(basePage.baseURL+`/listings/${id}`, {
-                method: 'PATCH',
+            fetch(basePage.baseURL+target, {
+                method: method,
                 headers: {
                     // 'Content-Type': 'application/json',
                     'Accept': 'application/json'

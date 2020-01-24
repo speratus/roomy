@@ -52,6 +52,6 @@ class ListingDetailPage {
         const container = document.querySelector('#details')
         BasePage.clearElements(container)
 
-        container.appendChild(this.listing.renderEditForm())
+        container.appendChild(this.listing.renderEditForm(`/listings/${this.listing.id}`, 'PATCH'))
     }
 }

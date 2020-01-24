@@ -28,11 +28,11 @@ class ListingsController < ApplicationController
     end
 
     def update
-        # puts "++++++++++++++++++++++++++++++++"
-        # puts "Entering the update action"
+        puts "++++++++++++++++++++++++++++++++"
+        puts "Entering the update action"
         listing = Listing.find_by(id: params[:id])
-        # puts "++++++++++++++++++++++++++++++"
-        # puts listing_params
+        puts "++++++++++++++++++++++++++++++"
+        puts listing_params
 
         if listing.update(listing_params)
             render json: ListingSerializer.serialize_listing(listing)
