@@ -99,16 +99,45 @@ class User {
         return wrapper
     }
 
+    renderUserImage() {
+        const figure = document.createElement('figure')
+        figure.className = 'image'
+
+        const img = document.createElement('img')
+        img.id = 'user-avatar'
+        img.src = this.avatar
+
+        figure.appendChild(img)
+
+        return figure
+    }
+
     renderEditForm() {
         const form = document.createElement('form')
         form.id = 'edit-user-form'
+
+        const displayedAvatar = this.renderUserImage()
 
         const name = this.renderField('text', 'name')
         const username = this.renderField('text', 'username')
         const type = this.renderField('radio', 'type')
         const avatar = this.renderField('file', 'avatar')
 
+        avatar.addEventListener('change', e => {
+            const file = e.target.files[0]
+
+            const reader = new FileReader()
+            reader.addEventListener('load', e => {
+                const ava = document.querySelector('#user-avatar')
+                ava.src = e.target.result
+            })
+            reader.readAsDataURL(file)
+
+        })
+
         const submit = this.renderControl('submit', 'Save changes')
+
+        form.appendChild(displayedAvatar)
 
         form.appendChild(name)
         form.appendChild(username)
@@ -123,6 +152,7 @@ class User {
             const username = e.target['username'].value
             const type = e.target['type'].value
             const avatar = e.target['avatar'].files[0]
+            console.log(avatar)
 
             const formData = new FormData()
 
