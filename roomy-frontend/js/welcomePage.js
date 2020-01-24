@@ -38,7 +38,7 @@ class WelcomePage {
     }
 
     renderFullPageBanner(mainText, contents) {
-        console.log('called from ', this)
+        // console.log('called from ', this)
         BasePage.clearElements(this.content)
 
         const bannerSection = document.createElement('section')
@@ -54,7 +54,7 @@ class WelcomePage {
         title.className = 'title is-1'
         title.textContent = mainText
 
-        console.log(contents)
+        // console.log(contents)
 
         centerer.appendChild(title)
         centerer.appendChild(contents) //used to be centerer.apc(buttonLevel)
@@ -84,7 +84,7 @@ class WelcomePage {
                 basePage.user = message.user
                 basePage.showMain()
                 const user = new User(message.user)
-                console.log(user)
+                // console.log(user)
                 navBar.setEditInfoButton('Edit my Info', () => {
                     document.body.appendChild(user.renderEditModal('Edit my info', user.renderEditForm()))
                 }, 'nav-edit-button')

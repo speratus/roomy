@@ -76,6 +76,12 @@ class SeekerApplication {
             }).then(res => res.json()).then(message => {
                 if (message.id) {
                     e.target.append('Application Sent successfully')
+                    fetch(basePage.baseURL+`/seeker_applications/${message.id}`).then(res => res.json())
+                        .then(app => {
+                            if (app.id) {
+                                basePage.user.applications.push(app)
+                            }
+                        })
                 }
             })
         })

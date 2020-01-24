@@ -265,14 +265,14 @@ class Listing {
                 input.className = 'input is-rounded is-primary'
                 input.name = attribute
                 input.placeholder = this.titleCaseWords(attribute)
-                input.value = this[attribute]
+                input.value = this[attribute] ? this[attribute] : ''
                 break
             case 'textarea':
                 input = document.createElement('textarea')
                 input.className = 'textarea has-fixed-size is-primary'
                 input.name = attribute
                 input.placeholder = this.titleCaseWords(attribute)
-                input.value = this[attribute]
+                input.value = this[attribute] ? this[attribute] : ''
                 break
             case 'select':
                 input = this.renderSelect(attribute, ['open', 'partially-filled', 'closed'])
@@ -384,32 +384,23 @@ class Listing {
             if (method === 'POST') {
                 formData.append('listing[user_id]', this.userId)
             }
-
-            // const data = {
-            //     title: title,
-            //     description: description,
-            //     address: address,
-            //     'monthly_rent': rent,
-            //     status: status,
-            //     'target_roommate_number': roommateNumber
-            // }
             console.log(basePage.baseURL+target)
             console.log(method)
 
             fetch(basePage.baseURL+target, {
                 method: method,
                 headers: {
-                    // 'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                // body: JSON.stringify({
-                //     listing: data
-                // })
                 body: formData
             }).then(res => res.json()).then(listingData => {
                 console.log(listingData)
-                basePage.user.listingId = listingData.id
-                basePage.showMain()
+                if (listingData.id) {
+                    basePage.user.listingId = listingData.id
+                    basePage.showMain()
+                } else {
+                    basePage.renderModalNotification(listingData.message + " " + listingData.errors.join(', '), 'is-danger')
+                }
             })
         })
 

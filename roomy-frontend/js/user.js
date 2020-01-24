@@ -277,7 +277,7 @@ class User {
             
             container.appendChild(headerWrapper)
             for (let a of this.applications) {
-                console.log('creating application')
+                // console.log('creating application')
                 container.appendChild(new SeekerApplication(a).renderApplicationForUser())
             }
         }

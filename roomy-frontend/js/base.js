@@ -19,6 +19,12 @@ class BasePage {
     showWelcome(e) {
         BasePage.clearElements(this.main)
 
+        // console.log('removing elements')
+        // console.log(document.getElementById('left'))
+        // console.log(document.getElementById('right'))
+        // BasePage.clearElements(document.querySelector('#left'))
+        // BasePage.clearElements(document.querySelector('#right'))
+
         this.main.appendChild(this.navbar)
 
         const welcomePage = new WelcomePage()
@@ -65,6 +71,39 @@ class BasePage {
         span.appendChild(i)
 
         return span
+    }
+
+    renderModalNotification(message, modifier) {
+        console.log('rendering notification modal')
+        const modal = document.createElement('div')
+        modal.className = 'modal is-active'
+        modal.id = 'notification-modal'
+
+        // const modalBack = document.createElement('div')
+        // modalBack.className = 'modal-background'
+        // modal.appendChild(modalBack)
+
+        const modalContent = document.createElement('div')
+        modalContent.className = 'modal-content'
+
+        const notification = document.createElement('div')
+        notification.className = `notification ${modifier}`
+        
+        const deleteButton = document.createElement('button')
+        deleteButton.className = 'delete'
+        deleteButton.addEventListener('click', e => {
+            document.querySelector('#notification-modal').remove()
+        })
+
+        notification.appendChild(deleteButton)
+
+        notification.append(message)
+
+        modalContent.append(notification)
+
+        modal.append(modalContent)
+
+        document.body.appendChild(modal)
     }
 }
 
