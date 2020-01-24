@@ -4,6 +4,39 @@ class WelcomePage {
         this.content.id = 'main-content'
     }
 
+    renderModalNotification(message, modifier) {
+        console.log('rendering notification modal')
+        const modal = document.createElement('div')
+        modal.className = 'modal is-active'
+        modal.id = 'notification-modal'
+
+        // const modalBack = document.createElement('div')
+        // modalBack.className = 'modal-background'
+        // modal.appendChild(modalBack)
+
+        const modalContent = document.createElement('div')
+        modalContent.className = 'modal-content'
+
+        const notification = document.createElement('div')
+        notification.className = `notification ${modifier}`
+        
+        const deleteButton = document.createElement('button')
+        deleteButton.className = 'delete'
+        deleteButton.addEventListener('click', e => {
+            document.querySelector('#notification-modal').remove()
+        })
+
+        notification.appendChild(deleteButton)
+
+        notification.append(message)
+
+        modalContent.append(notification)
+
+        modal.append(modalContent)
+
+        document.body.appendChild(modal)
+    }
+
     renderFullPageBanner(mainText, contents) {
         console.log('called from ', this)
         BasePage.clearElements(this.content)
@@ -18,7 +51,7 @@ class WelcomePage {
         centerer.className = 'container has-text-centered'
 
         const title = document.createElement('h1')
-        title.className = 'title is-size-1'
+        title.className = 'title is-1'
         title.textContent = mainText
 
         console.log(contents)
@@ -47,12 +80,17 @@ class WelcomePage {
                 username: username
             })
         }).then(res => res.json()).then(message => {
-            basePage.user = message.user
-            basePage.showMain()
-            const user = new User(message.user)
-            navBar.setEditInfoButton('Edit my Info', () => {
-                document.body.appendChild(user.renderEditModal())
-            }, 'nav-edit-button')
+            if (message.success) {
+                basePage.user = message.user
+                basePage.showMain()
+                const user = new User(message.user)
+                navBar.setEditInfoButton('Edit my Info', () => {
+                    document.body.appendChild(user.renderEditModal())
+                }, 'nav-edit-button')
+            } else {
+                console.log(this)
+                this.renderModalNotification(message.message, 'is-danger')
+            }
         })
     }
 
@@ -79,11 +117,15 @@ class WelcomePage {
                 user: user
             })
         }).then(res => res.json()).then(message => {
-            basePage.user = message
-            if (message.type === 'RoomSeeker') {
-                basePage.showMain()
+            if (message.id) {
+                basePage.user = message
+                if (message.type === 'RoomSeeker') {
+                    basePage.showMain()
+                } else {
+    
+                }
             } else {
-
+                this.renderModalNotification(message.message + ` ${message.errors.join(', ')}`, 'is-danger')
             }
         })
     }
@@ -113,7 +155,7 @@ class WelcomePage {
         loginForm.appendChild(inputWrapper)
         loginForm.appendChild(buttonWrapper)
 
-        loginForm.addEventListener('submit', this.executeLogin)
+        loginForm.addEventListener('submit', this.executeLogin.bind(this))
         return loginForm
     }
 
@@ -207,7 +249,7 @@ class WelcomePage {
         form.appendChild(typeField)
         form.appendChild(submitButton)
 
-        form.addEventListener('submit', this.executeSingup)
+        form.addEventListener('submit', this.executeSingup.bind(this))
 
         return form
     }
