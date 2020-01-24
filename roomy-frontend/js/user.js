@@ -262,6 +262,20 @@ class User {
             document.body.appendChild(this.renderEditModal('My Applications', message))
             return
         } else {
+            const headerWrapper = document.createElement('div')
+            headerWrapper.className = 'level'
+
+            const listingTitle = document.createElement('p')
+            listingTitle.className = 'level-item subtitle'
+            listingTitle.textContent = 'Listing Title'
+            headerWrapper.appendChild(listingTitle)
+
+            const message = document.createElement('p')
+            message.textContent = 'Message'
+            message.className = 'level-item subtitle'
+            headerWrapper.appendChild(message)
+            
+            container.appendChild(headerWrapper)
             for (let a of this.applications) {
                 console.log('creating application')
                 container.appendChild(new SeekerApplication(a).renderApplicationForUser())

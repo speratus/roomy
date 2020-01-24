@@ -50,7 +50,12 @@ form {
     max-width: 100%;
 }
 
-p .level-item {
-    max-width: 100%;
+.modal-card-body .level {
+    max-width: 25vh;
+    width: 100%;
     overflow-wrap: break-word;
+}
+
+.modal-card-body .level-item {
+    width: 100%;
 }
