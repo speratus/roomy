@@ -110,6 +110,31 @@ class Listing {
         const idealCharacteristics = document.createElement('p')
         idealCharacteristics.innerHTML = `<strong>Preferred characteristics:</strong> ${characteristics.join(', ')}`
 
+
+        /////////////////////////////////////////////////////////////////////////
+        const userInfo = document.createElement('div')
+        userInfo.className = 'content'
+
+        const label = document.createElement('label')
+        label.className = 'label'
+        label.textContent = 'User Info'
+        userInfo.appendChild(label)
+        const span = document.createElement('strong')
+        span.textContent = 'Name: '
+        userInfo.appendChild(span)
+        userInfo.append(this.user.name)
+
+        const userImgWrapper = document.createElement('figure')
+        userImgWrapper.className = 'image is-256x256'
+
+        const img = document.createElement('img')
+        // img.className = 'is-256x256'
+        img.src = this.user.avatar
+        userImgWrapper.appendChild(img)
+
+        userInfo.appendChild(userImgWrapper)
+
+        /////////////////////////////////////////////////////////////////////////
         
         
         mediaContentWrapper.appendChild(description)
@@ -119,6 +144,10 @@ class Listing {
         mediaContentWrapper.appendChild(roommates)
         mediaContentWrapper.appendChild(updatedTime)
         mediaContentWrapper.appendChild(idealCharacteristics)
+
+        ////////////////////////////////////////////////////////////////////////
+        mediaContentWrapper.appendChild(userInfo)
+        ////////////////////////////////////////////////////////////////////////
         
         if (displayApplications) {
             const applicationContainer = document.createElement('div')
