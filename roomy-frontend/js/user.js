@@ -274,6 +274,16 @@ class User {
             message.textContent = 'Message'
             message.className = 'level-item subtitle'
             headerWrapper.appendChild(message)
+
+            const status = document.createElement('p')
+            status.textContent = 'Status'
+            status.className = 'level-item subtitle'
+            headerWrapper.appendChild(status)
+
+            const buttons = document.createElement('p')
+            buttons.textContent = 'Delete'
+            buttons.className = 'level-item subtitle'
+            headerWrapper.appendChild(buttons)
             
             container.appendChild(headerWrapper)
             for (let a of this.applications) {

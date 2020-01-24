@@ -284,6 +284,10 @@ class SeekerApplication {
 
         // container.appendChild(contentWrapper)
 
+        const statusContainer = document.createElement('p')
+        statusContainer.className = 'level-item'
+        statusContainer.innerHTML = `<strong>${this.status}</strong>`
+
         const buttonWrapper = document.createElement('div')
         buttonWrapper.className = 'level-item buttons'
 
@@ -306,6 +310,7 @@ class SeekerApplication {
 
         container.appendChild(listingTitle)
         container.appendChild(message)
+        container.appendChild(statusContainer)
         container.appendChild(buttonWrapper)
 
         return container
