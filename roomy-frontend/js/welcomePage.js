@@ -88,7 +88,6 @@ class WelcomePage {
                     document.body.appendChild(user.renderEditModal())
                 }, 'nav-edit-button')
             } else {
-                console.log(this)
                 this.renderModalNotification(message.message, 'is-danger')
             }
         })
@@ -120,6 +119,9 @@ class WelcomePage {
             if (message.id) {
                 basePage.user = message
                 if (message.type === 'RoomSeeker') {
+                    navBar.setEditInfoButton('Edit my Info', () => {
+                        document.body.appendChild(new User(message).renderEditModal())
+                    }, 'nav-edit-button')
                     basePage.showMain()
                 } else {
     

@@ -231,6 +231,7 @@ class User {
             }).then(res => res.json()).then(message => {
                 if (message.user) {
                     document.querySelector('#edit-user-form').remove()
+                    document.querySelector('#nav-edit-button').remove()
                     basePage.user = null
                     basePage.showWelcome()
                 }
