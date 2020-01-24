@@ -79,8 +79,12 @@ class WelcomePage {
                 user: user
             })
         }).then(res => res.json()).then(message => {
-            basePage.user = message.user
-            basePage.showMain()
+            basePage.user = message
+            if (message.type === 'RoomSeeker') {
+                basePage.showMain()
+            } else {
+
+            }
         })
     }
 
