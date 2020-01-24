@@ -124,7 +124,10 @@ class WelcomePage {
                     }, 'nav-edit-button')
                     basePage.showMain()
                 } else {
-                    console.log(message.type)
+                    navBar.setEditInfoButton('Edit my Info', () => {
+                        document.body.appendChild(new User(message).renderEditModal())
+                    }, 'nav-edit-button')
+                    basePage.showMain()
                     this.renderListingFormModal(message.id)
                 }
             } else {
